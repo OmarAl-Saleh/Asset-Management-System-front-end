@@ -1,0 +1,167 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="asset-wrapper">
+  <button
+    pButton
+    label="Add Asset"
+    icon="pi pi-plus"
+    (click)="openCreateDialog()"
+    class="mb-3"
+  ></button>
+
+  <div class="grid">
+    <div *ngFor="let asset of assets" class="col-12 md:col-4">
+      <p-card [header]="asset.name" [subheader]="asset.code">
+        <div class="card-description">{{ asset.description }}</div>
+
+        <div class="card-info-group">
+          <div class="card-row">
+            <span class="card-label"
+              ><i class="pi pi-calendar"></i> Purchase Date:</span
+            >
+            <span class="card-value">{{
+              asset.purchaseDate | date : "mediumDate"
+            }}</span>
+          </div>
+
+          <div class="card-row">
+            <span class="card-label"><i class="pi pi-dollar"></i> Value:</span>
+            <span class="card-value">{{ asset.value | currency }}</span>
+          </div>
+
+          <div class="card-row">
+            <span class="card-label"><i class="pi pi-tags"></i> Category:</span>
+            <span class="card-value">{{
+              getCategoryName(asset.categoryId)
+            }}</span>
+          </div>
+
+          <div class="card-row">
+            <span class="card-label"
+              ><i class="pi pi-map-marker"></i> Location:</span
+            >
+            <span class="card-value">{{
+              getLocationName(asset.locationId)
+            }}</span>
+          </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="button-sm mr-2"
+            (click)="openEditDialog(asset)"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="button-sm button-danger"
+            (click)="deleteAsset(asset)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="{{ isEdit ? 'Edit' : 'Create' }} Asset"
+  [(visible)]="displayDialog"
+  modal
+  [style]="{ width: '500px' }"
+>
+  <div class="p-fluid">
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        pInputText
+        id="name"
+        [(ngModel)]="selectedAsset.name"
+        class="w-full"
+      />
+    </div>
+
+    <div class="field">
+      <label for="code">Code</label>
+      <input
+        pInputText
+        id="code"
+        [(ngModel)]="selectedAsset.code"
+        class="w-full"
+      />
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <input
+        pInputText
+        id="description"
+        [(ngModel)]="selectedAsset.description"
+        class="w-full"
+      />
+    </div>
+
+    <div class="field">
+      <label for="purchaseDate">Purchase Date</label>
+      <input
+        type="date"
+        id="purchaseDate"
+        [(ngModel)]="selectedAsset.purchaseDate"
+        class="w-full custom-date-input"
+      />
+    </div>
+
+    <div class="field">
+      <label for="value">Value</label>
+      <p-inputNumber
+        [(ngModel)]="selectedAsset.value"
+        mode="decimal"
+        [minFractionDigits]="2"
+        class="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <p-autoComplete
+        [(ngModel)]="selectedCategory"
+        [suggestions]="filteredCategories"
+        (completeMethod)="searchCategories($event)"
+        [dropdown]="true"
+        optionLabel="name"
+        [forceSelection]="true"
+        class="w-full"
+        appendTo="body"
+      ></p-autoComplete>
+    </div>
+
+    <div class="field">
+      <label for="location">Location</label>
+      <p-autoComplete
+        [(ngModel)]="selectedLocation"
+        [suggestions]="filteredLocations"
+        (completeMethod)="searchLocations($event)"
+        [dropdown]="true"
+        optionLabel="name"
+        [forceSelection]="true"
+        class="w-full"
+        appendTo="body"
+      ></p-autoComplete>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <button pButton label="Save" (click)="saveAsset()" type="button"></button>
+      <button
+        pButton
+        label="Cancel"
+        class="p-button-secondary"
+        type="button"
+        (click)="displayDialog = false"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>

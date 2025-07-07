@@ -1,0 +1,62 @@
+<p-toast></p-toast>
+
+<div class="grid p-4">
+  <div class="col-12 md:col-4" *ngIf="userRole === 'Admin'">
+    <p-card
+      header="Total Users"
+      class="shadow-2 border-1 surface-border h-12rem mb-2"
+    >
+      <div
+        class="flex justify-center h-full text-6xl text-primary font-bold mt-5"
+      >
+        {{ dashboardData.totalUsers }}
+      </div>
+    </p-card>
+  </div>
+
+  <div class="col-12 md:col-4" *ngIf="userRole === 'Admin'">
+    <p-card
+      header="Active Users"
+      class="shadow-2 border-1 surface-border h-12rem"
+    >
+      <div
+        class="flex justify-center align-items-center h-full text-6xl text-green-500 font-bold mt-5"
+      >
+        {{ dashboardData.totalActiveUsers }}
+      </div>
+    </p-card>
+  </div>
+
+  <div class="col-12 md:col-4">
+    <p-card header="Assets" class="shadow-2 border-1 surface-border h-12rem">
+      <div
+        class="flex justify-center align-items-center h-full text-6xl text-cyan-500 font-bold mt-5"
+      >
+        {{ dashboardData.totalAssets }}
+      </div>
+    </p-card>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <p-card
+      header="Categories"
+      class="shadow-2 border-1 surface-border h-12rem"
+    >
+      <div
+        class="flex justify-center align-items-center h-full text-6xl text-indigo-500 font-bold mt-5"
+      >
+        {{ dashboardData.totalCategories }}
+      </div>
+    </p-card>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <p-card header="Locations" class="shadow-2 border-1 surface-border h-12rem">
+      <div
+        class="flex justify-center align-items-center h-full text-6xl text-orange-500 font-bold mt-5"
+      >
+        {{ dashboardData.totalLocations }}
+      </div>
+    </p-card>
+  </div>
+</div>

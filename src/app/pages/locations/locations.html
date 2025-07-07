@@ -1,0 +1,95 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="location-wrapper">
+  <button
+    pButton
+    label="Add Location"
+    icon="pi pi-plus"
+    (click)="openCreateDialog()"
+    class="mb-3"
+  ></button>
+
+  <div class="grid">
+    <div *ngFor="let loc of locations" class="col-12 md:col-4">
+      <p-card [header]="loc.name" [subheader]="loc.description">
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="button-sm mr-2"
+            (click)="openEditDialog(loc)"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="button-sm button-danger"
+            (click)="deleteLocation(loc)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="{{ isEdit ? 'Edit' : 'Create' }} Location"
+  [(visible)]="displayDialog"
+  modal
+  [style]="{ width: '400px' }"
+>
+  <!-- <div class="fluid">
+    <label for="name">Name</label>
+    <input pInputText id="name" [(ngModel)]="selectedLocation.name" />
+
+    <label for="desc" class="mt-5 mb-3">Description</label>
+    <input pInputText id="desc" [(ngModel)]="selectedLocation.description" />
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton label="Save" (click)="saveLocation()"></button>
+    <button
+      pButton
+      label="Cancel"
+      class="button-secondary"
+      (click)="displayDialog = false"
+    ></button>
+  </ng-template> -->
+
+  <div class="field">
+    <label for="name">Name</label>
+    <input
+      pInputText
+      id="name"
+      [(ngModel)]="selectedLocation.name"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+    />
+  </div>
+
+  <div class="field">
+    <label for="desc">Description</label>
+    <input
+      pInputText
+      id="desc"
+      [(ngModel)]="selectedLocation.description"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+    />
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <button
+        pButton
+        type="button"
+        label="Save"
+        (click)="saveLocation()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="button-secondary"
+        (click)="displayDialog = false"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>

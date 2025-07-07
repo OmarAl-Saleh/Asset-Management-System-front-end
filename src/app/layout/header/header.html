@@ -1,0 +1,16 @@
+<header class="wrapper row full-center">
+  <img src="images/logo.png" alt="Logo Image" class="logo" />
+  <h1 class="title">Assets Management System</h1>
+
+  <nav class="main-nav" *ngIf="auth.validateToken()">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/assets">Assets</a>
+    <a routerLink="/categories">Categories</a>
+    <a routerLink="/locations">Locations</a>
+    <a routerLink="/users" *ngIf="auth.getUserRole() === 'Admin'">Users</a>
+  </nav>
+
+  <button *ngIf="auth.isAuthenticated()" (click)="logout()" class="logout-btn">
+    Logout
+  </button>
+</header>

@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+@use "./variables.scss" as *;
+
+@import "../node_modules/primeflex/primeflex.css";
+
+@import "../node_modules/primeicons/primeicons.css";
+
+// @import "./variables.scss";
+
+body,
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+}
+
+html,
+body,
+app-root {
+  height: 100%;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+mt-25 {
+  margin-top: 25px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.full-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}

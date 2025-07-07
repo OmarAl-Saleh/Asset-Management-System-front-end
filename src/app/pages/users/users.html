@@ -1,0 +1,116 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="user-wrapper">
+  <button
+    pButton
+    label="Add User"
+    icon="pi pi-plus"
+    (click)="openCreateDialog()"
+    class="mb-3"
+  ></button>
+
+  <div class="grid">
+    <div *ngFor="let user of users" class="col-12 md:col-4 mb-4">
+      <p-card [header]="user.username" [subheader]="user.role">
+        <div class="flex justify-between align-items-center mt-2 mb-2">
+          <span class="font-semibold text-gray-600 mr-2">Status:</span>
+          <span
+            [ngClass]="
+              user.isActive
+                ? 'text-green-500 font-bold'
+                : 'text-red-500 font-bold'
+            "
+          >
+            {{ user.isActive ? "Active" : "Inactive" }}
+          </span>
+        </div>
+
+        
+        <ng-template pTemplate="footer">
+          <div class="flex gap-2">
+            <button
+              pButton
+              icon="pi pi-trash"
+              class="button-sm button-danger"
+              (click)="deleteUser(user)"
+            ></button>
+
+            <button
+              pButton
+              icon="pi pi-user-plus"
+              label="Activate"
+              *ngIf="!user.isActive"
+              class="button-sm button-danger"
+              (click)="toggleActivation(user)"
+            ></button>
+            <button
+              pButton
+              icon="pi pi-user-minus"
+              label="Deactivate"
+              *ngIf="user.isActive"
+              class="button-sm button-danger"
+              (click)="toggleActivation(user)"
+            ></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+
+  <p-dialog
+    header="Create User"
+    [(visible)]="displayDialog"
+    modal
+    [style]="{ width: '400px' }"
+  >
+    <div class="fluid">
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          pInputText
+          id="username"
+          [(ngModel)]="selectedUser.username"
+          class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          pInputText
+          type="password"
+          id="password"
+          [(ngModel)]="selectedUser.password"
+          class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="role">Role</label>
+        <p-autoComplete
+          id="role"
+          [(ngModel)]="selectedUser.role"
+          [suggestions]="filteredRoles"
+          (completeMethod)="filterRoles($event)"
+          [dropdown]="true"
+          placeholder="Select a role"
+          class="w-full"
+          appendTo="body"
+        ></p-autoComplete>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="flex justify-end gap-2">
+        <button pButton label="Save" (click)="saveUser()"></button>
+        <button
+          pButton
+          label="Cancel"
+          class="button-secondary"
+          (click)="displayDialog = false"
+        ></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>

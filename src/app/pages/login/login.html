@@ -1,0 +1,46 @@
+
+<p-toast></p-toast>
+
+<div
+  class="login-container surface-card p-6 border-round shadow-2 w-full sm:w-25rem mx-auto mt-5"
+>
+  <h2 class="text-center text-primary mb-4">Login</h2>
+  <form
+    (submit)="onLogin(); $event.preventDefault()"
+    class="flex flex-column gap-3"
+  >
+    <span class="float-label">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        pInputText
+        [(ngModel)]="username"
+        name="username"
+        required
+        class="w-full mt-3"
+      />
+    </span>
+
+    <span class="float-label">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        pInputText
+        [(ngModel)]="password"
+        name="password"
+        required
+        class="w-full mt-3"
+      />
+    </span>
+
+    <button
+      pButton
+      type="submit"
+      label="Login"
+      icon="pi pi-sign-in"
+      class="w-full mt-2"
+    ></button>
+  </form>
+</div>

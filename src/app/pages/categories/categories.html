@@ -1,0 +1,94 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="category-wrapper">
+  <button
+    pButton
+    label="Add Category"
+    icon="pi pi-plus"
+    (click)="openCreateDialog()"
+    class="mb-3"
+  ></button>
+
+  <div class="grid">
+    <div *ngFor="let cat of categories" class="col-5 md-4">
+      <p-card [header]="cat.name" [subheader]="cat.description">
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="button-sm mr-2"
+            (click)="openEditDialog(cat)"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="button-sm button-danger"
+            (click)="deleteCategory(cat)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="{{ isEdit ? 'Edit' : 'Create' }} Category"
+  [(visible)]="displayDialog"
+  modal
+  [style]="{ width: '400px' }"
+>
+  <!-- <div class="fluid">
+    <label for="name">Name</label>
+    <input pInputText id="name" [(ngModel)]="selectedCategory.name" />
+
+    <label for="desc" class="mt-5">Description</label>
+    <input pInputText id="desc" [(ngModel)]="selectedCategory.description" />
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton label="Save" (click)="saveCategory()"></button>
+    <button
+      pButton
+      label="Cancel"
+      class="button-secondary"
+      (click)="displayDialog = false"
+    ></button>
+  </ng-template> -->
+  <div class="field">
+    <label for="name">Name</label>
+    <input
+      pInputText
+      id="name"
+      [(ngModel)]="selectedCategory.name"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+    />
+  </div>
+
+  <div class="field">
+    <label for="desc">Description</label>
+    <input
+      pInputText
+      id="desc"
+      [(ngModel)]="selectedCategory.description"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+    />
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <button
+        pButton
+        type="button"
+        label="Save"
+        (click)="saveCategory()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="button-secondary"
+        (click)="displayDialog = false"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>
