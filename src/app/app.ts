@@ -11,5 +11,5 @@ import { Footer } from './layout/footer/footer';
   styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'Asset-Managment-System-frontend';
+  protected title = 'Asset-Management-System-frontend';
 }

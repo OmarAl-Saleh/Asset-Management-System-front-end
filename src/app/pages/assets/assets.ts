@@ -51,6 +51,9 @@ export class AssetsComponent implements OnInit {
   displayDialog = false;
   isEdit = false;
 
+  searchQuery: string = '';
+  filteredAssets: Asset[] = [];
+
   constructor(
     private api: Api,
     private confirm: ConfirmationService,
@@ -79,7 +82,10 @@ export class AssetsComponent implements OnInit {
   loadAssets() {
     this.api.getAll<any>('Asset/GetAllAssets').subscribe({
       next: (res) => {
-        if (res.code === 1) this.assets = res.obj;
+        if (res.code === 1) {
+          this.assets = res.obj;
+          this.filteredAssets = res.obj;
+        }
       },
       error: () =>
         this.toast.add({
@@ -87,6 +93,21 @@ export class AssetsComponent implements OnInit {
           summary: 'Error',
           detail: 'Failed to load assets',
         }),
+    });
+  }
+
+  filterAssets() {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredAssets = this.assets.filter((asset) => {
+      const categoryName = this.getCategoryName(asset.categoryId).toLowerCase();
+      const locationName = this.getLocationName(asset.locationId).toLowerCase();
+      return (
+        asset.name.toLowerCase().includes(query) ||
+        asset.code.toLowerCase().includes(query) ||
+        asset.description.toLowerCase().includes(query) ||
+        categoryName.includes(query) ||
+        locationName.includes(query)
+      );
     });
   }
 

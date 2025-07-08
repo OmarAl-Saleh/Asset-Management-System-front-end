@@ -3,7 +3,7 @@ export interface Asset {
   name: string;
   code: string;
   description: string;
-  purchaseDate: string; // ISO date string yyyy-mm-dd
+  purchaseDate: string; 
   value: number;
   categoryId: number;
   locationId: number;

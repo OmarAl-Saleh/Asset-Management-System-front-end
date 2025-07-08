@@ -10,7 +10,7 @@
     <a routerLink="/users" *ngIf="auth.getUserRole() === 'Admin'">Users</a>
   </nav>
 
-  <button *ngIf="auth.isAuthenticated()" (click)="logout()" class="logout-btn">
+  <button *ngIf="auth.validateToken()" (click)="logout()" class="logout-btn">
     Logout
   </button>
 </header>

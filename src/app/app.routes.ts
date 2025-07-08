@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import { LoginComponent } from './pages/login/login';
 import { AuthGuard } from './guards/auth-guard';
 import { CategoriesComponent } from './pages/categories/categories';
@@ -8,12 +7,13 @@ import { AssetsComponent } from './pages/assets/assets';
 import { UsersComponent } from './pages/users/users';
 import { AdminGuard } from './guards/admin-guard';
 import { DashboardComponent } from './pages/dashboard/dashboard';
+import { GuestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard', // default when logged in
+    redirectTo: 'dashboard',
   },
   {
     path: 'dashboard',
@@ -43,6 +43,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [GuestGuard],
   },
   {
     path: '**',
