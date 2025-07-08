@@ -31,7 +31,7 @@ src/
 └── environments/      # Environment configs
 ```
 ## 🔐 Authentication
-```text
+
 On successful login, JWT access and refresh tokens are saved in localStorage.
 
 Tokens are decoded to extract roles.
@@ -43,7 +43,9 @@ AuthGuard: blocks unauthenticated access
 AdminGuard: allows Admin-only access
 
 🧪 Test Users
+
 Username	Password	Role
+```
 omar	    test1234	Admin
 moyyad	  test1234	User
 ```
@@ -51,9 +53,10 @@ moyyad	  test1234	User
 These are the backend API endpoints consumed by this frontend.
 
 ## 🔐 Auth
-Endpoint	Method	Description
-/api/Auth/Login	POST -->	Authenticates user and returns access + refresh token
-
+```
+Endpoint	               Method	        Description
+/api/Auth/Login	         POST       	  Authenticates user and returns access + refresh token
+```
 ## 📊 Dashboard
 ```
 Endpoint	Method	Description
@@ -67,16 +70,7 @@ Endpoint	                  Method	            Description
 /api/User/DeleteUser/{id}	   DELETE 	        Delete user by ID
 /api/User/ActivateUser/{id}	 POST             Toggle active status
 
-User DTO:
 
-json
-Copy
-Edit
-{
-  "username": "string",
-  "password": "string",
-  "role": "string"
-}
 ```
 ## 📦 Assets
 ```
@@ -87,23 +81,7 @@ Endpoint	                      Method	    Description
 /api/Asset/UpdateAsset	        PUT  		     Update existing asset
 /api/Asset/DeleteAsset/{id}    	DELETE    	Delete asset
 
-Asset Schema:
 
-sql
-Copy
-Edit
-CREATE TABLE Assets (
-  Id INT PRIMARY KEY IDENTITY,
-  Name NVARCHAR(100) NOT NULL,
-  Code NVARCHAR(50) UNIQUE NOT NULL,
-  Description NVARCHAR(255),
-  PurchaseDate DATE NOT NULL,
-  Value DECIMAL(18, 2) NOT NULL,
-  CategoryId INT NOT NULL,
-  LocationId INT NOT NULL,
-  FOREIGN KEY (CategoryId) REFERENCES Categories(Id),
-  FOREIGN KEY (LocationId) REFERENCES Locations(Id)
-);
 ```
 ## 🗂️ Categories
 ```
@@ -124,22 +102,17 @@ Endpoint	                          Method	              Description
 /api/Location/DeleteLocation/{id}	  DELETE	              Delete location
 ```
 ## 🧠 Role-Based Routing Example
-```
+
 All routes use Angular Standalone Components
 
 Route protection via:
 
-AuthGuard → Checks for valid token
+- AuthGuard → Checks for valid token
 
-AdminGuard → Checks if role is Admin (from JWT)
+- AdminGuard → Checks if role is Admin (from JWT)
 
-Example usage in routes:
+## 👨‍💻 Author
+Omar Alsaleh
 
-ts
-Copy
-Edit
-{
-  path: 'users',
-  component: UserComponent,
-  canActivate: [AuthGuard, AdminGuard]
-}
+Email: [omaralsaleh1129@gmail]
+
